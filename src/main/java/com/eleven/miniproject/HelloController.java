@@ -9,6 +9,6 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "CICD 작동 테스트";
+        return "CICD 작동 테스트 : 바꾼결과 잘나올까?";
     }
 }
