@@ -4,7 +4,13 @@ name: Build and Deploy Spring Boogt to AWS EC2
 on:
   push:
     branches: [main]
-    
+
+env:
+  PROJECT_NAME: cicd_project
+  BUCKET_NAME: miniproject-eleven-bucket
+  CODE_DEPLOY_APP_NAME: cicdapp
+  DEPLOYMENT_GROUP_NAME: cicdapp_deploy
+
 jobs:
   build:
     runs-on: ubuntu-22.04
