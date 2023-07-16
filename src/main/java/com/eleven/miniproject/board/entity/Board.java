@@ -23,4 +23,15 @@ public class Board {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "image_id")
+    private Image image;
+
+    public Board(String title, String content, Image image) {
+        this.title = title;
+        this.content = content;
+        this.user = null;
+        this.image = image;
+    }
 }
