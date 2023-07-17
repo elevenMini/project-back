@@ -45,6 +45,10 @@ public class S3Service {
     }
 
     public UploadImage upload(MultipartFile file) throws IOException {
+        if (file.isEmpty()) {
+            return null;
+        }
+
         String fileName = file.getOriginalFilename();
 
         String storeImageName = createStoreImageName(fileName);

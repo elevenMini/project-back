@@ -4,6 +4,7 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.Key;
 import java.util.Base64;
@@ -103,4 +105,27 @@ public class JwtUtil {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 
+    // 7) request 로 부터 토큰 꺼내오기
+    public String getTokenFromRequest(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        return tokenInCookies(cookies);
+    }
+
+    private String tokenInCookies(Cookie[] cookies) {
+        if (cookies == null) {
+            throw new NullPointerException("쿠키가 존재하지 않습니다");
+        }
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(AUTHORIZATION_HEADER)) {
+                try {
+                    return URLDecoder.decode(cookie.getValue(), "utf-8");
+                } catch (UnsupportedEncodingException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                throw new IllegalArgumentException("쿠키에서 사용자 정보를 꺼내올 수 없습니다");
+            }
+        }
+        return null;
+    }
 }

@@ -10,13 +10,14 @@ public class BoardResponseDto {
     private Long id;
     private String title;
     private String content;
-    private String username = null;
+    private String username;
     private UploadImage uploadImage;
 
     public BoardResponseDto(Board savedBoard) {
         this.id = savedBoard.getId();
         this.title = savedBoard.getTitle();
         this.content = savedBoard.getContent();
+        this.username = savedBoard.getUser().getUsername();
         this.uploadImage = savedBoard.getImage().getUploadImage();
     }
 }
