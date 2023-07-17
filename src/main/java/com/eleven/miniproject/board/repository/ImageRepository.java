@@ -1,4 +1,4 @@
-package com.eleven.miniproject.board.createBoard.repository;
+package com.eleven.miniproject.board.repository;
 
 import com.eleven.miniproject.board.entity.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
