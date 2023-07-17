@@ -6,6 +6,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.eleven.miniproject.board.entity.UploadImage;
 import jakarta.annotation.PostConstruct;
@@ -52,8 +53,10 @@ public class S3Service {
         String fileName = file.getOriginalFilename();
 
         String storeImageName = createStoreImageName(fileName);
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentType(file.getContentType());
 
-        s3Client.putObject(new PutObjectRequest(bucket, storeImageName, file.getInputStream(), null)
+        s3Client.putObject(new PutObjectRequest(bucket, storeImageName, file.getInputStream(), objectMetadata)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
         return new UploadImage(fileName, s3Client.getUrl(bucket, storeImageName).toString());
     }
