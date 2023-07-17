@@ -5,7 +5,6 @@ import com.eleven.miniproject.board.createBoard.service.BoardCreateService;
 import com.eleven.miniproject.board.dto.BoardRequestDto;
 import com.eleven.miniproject.board.dto.BoardResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
