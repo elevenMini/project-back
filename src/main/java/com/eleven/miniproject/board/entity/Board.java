@@ -28,10 +28,10 @@ public class Board {
     @JoinColumn(name = "image_id")
     private Image image;
 
-    public Board(String title, String content, Image image) {
+    public Board(User findUser, String title, String content, Image image) {
         this.title = title;
         this.content = content;
-        this.user = null;
+        this.user = findUser;
         this.image = image;
     }
 }
