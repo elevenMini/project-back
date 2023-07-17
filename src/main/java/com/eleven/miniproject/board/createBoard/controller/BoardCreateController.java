@@ -4,6 +4,7 @@ package com.eleven.miniproject.board.createBoard.controller;
 import com.eleven.miniproject.board.createBoard.service.BoardCreateService;
 import com.eleven.miniproject.board.dto.BoardRequestDto;
 import com.eleven.miniproject.board.dto.BoardResponseDto;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,10 +26,11 @@ public class BoardCreateController {
     public BoardResponseDto createBoard(
             @RequestParam("title") String title,
             @RequestParam("content") String content,
-            @RequestParam("image") MultipartFile image
+            @RequestParam("image") MultipartFile image,
+            HttpServletRequest request
     ) throws IOException {
         BoardRequestDto requestDto = new BoardRequestDto(title, content, image);
-        return boardCreateService.createBoard(requestDto);
+        return boardCreateService.createBoard(requestDto, request);
     }
 
 }
