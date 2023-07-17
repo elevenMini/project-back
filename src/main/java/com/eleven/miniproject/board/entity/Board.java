@@ -1,6 +1,7 @@
 package com.eleven.miniproject.board.entity;
 
 
+import com.eleven.miniproject.global.entity.Timestamped;
 import com.eleven.miniproject.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Board {
+public class Board extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
