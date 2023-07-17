@@ -12,13 +12,11 @@ public class BoardResponseDto {
     private String content;
     private String username = null;
     private UploadImage uploadImage;
-    private String fileDir;
 
-    public BoardResponseDto(Board savedBoard, String fileDir) {
+    public BoardResponseDto(Board savedBoard) {
         this.id = savedBoard.getId();
         this.title = savedBoard.getTitle();
         this.content = savedBoard.getContent();
         this.uploadImage = savedBoard.getImage().getUploadImage();
-        this.fileDir = fileDir;
     }
 }
