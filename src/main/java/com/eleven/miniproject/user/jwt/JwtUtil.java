@@ -68,9 +68,10 @@ public class JwtUtil {
             cookie.setPath("/");
             cookie.setHttpOnly(false);
             cookie.setSecure(true);
+            cookie.setAttribute("SameSite", "None");
 
             // Response 객체에 Cookie 추가
-            res.addHeader("Set-Cookie", cookie.toString() + "; SameSite=None");
+            res.addCookie(cookie);
 
         } catch (UnsupportedEncodingException e) {
             logger.error(e.getMessage());
