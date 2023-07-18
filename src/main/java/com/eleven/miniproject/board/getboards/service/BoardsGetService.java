@@ -10,11 +10,13 @@ import com.eleven.miniproject.user.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class BoardsGetService {
 
     private final BoardRepository boardRepository;
@@ -33,6 +35,14 @@ public class BoardsGetService {
 
         List<Board> boardList = boardRepository.findAll();
         return boardList.stream().map(BoardResponseDto::new).toList();
+    }
+    public BoardResponseDto getSelectedBoard(Long boarId, HttpServletRequest request) {
+
+        Board findBoard = boardRepository.findByIdAndUser(boarId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글을 찾을 수 없습니다."));
+
+        return new BoardResponseDto(findBoard);
+
     }
 
     private String findUsernameInJwtToken(HttpServletRequest request) {
