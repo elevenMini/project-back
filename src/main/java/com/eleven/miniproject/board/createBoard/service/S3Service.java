@@ -13,6 +13,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.util.UUID;
 
 @Service
 @NoArgsConstructor
+@Transactional
 public class S3Service {
     private AmazonS3 s3Client;
 
