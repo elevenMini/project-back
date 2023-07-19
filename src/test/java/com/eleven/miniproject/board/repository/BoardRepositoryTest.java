@@ -43,12 +43,10 @@ class BoardRepositoryTest {
 
         // when
         Board findBoard = boardRepository.findBoardAndImageByIdAndUsername(board.getId(), board.getUser().getUsername()).get();
-        System.out.println("findBoard.getId() = " + findBoard.getId());
-        System.out.println("findBoard.getImage().getId() = " + findBoard.getImage().getId());
-        System.out.println("findBoard.getImage().getUploadImage().getStoreFileName() = " + findBoard.getImage().getUploadImage().getStoreFileName());
-        System.out.println("findBoard.getUser().getUsername() = " + findBoard.getUser().getUsername());
+
 
         // then
-//        Assertions.assertThat(findBoard.getId()).isSameAs(board.getId());
+        Assertions.assertThat(findBoard.getId()).isSameAs(board.getId());
+        Assertions.assertThat(findBoard.getImage().getUploadImage().getStoreFileName()).isEqualTo(image.getUploadImage().getStoreFileName());
     }
 }
