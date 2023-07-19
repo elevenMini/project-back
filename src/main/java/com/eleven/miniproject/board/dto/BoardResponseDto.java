@@ -24,6 +24,9 @@ public class BoardResponseDto {
         this.username = savedBoard.getUser().getUsername();
         this.createdAt = savedBoard.getCreatedAt();
         this.modifiedAt = savedBoard.getModifiedAt();
-        this.uploadImage = savedBoard.getImage().getUploadImage();
+
+        if (savedBoard.getImage() != null) {
+            this.uploadImage = savedBoard.getImage().getUploadImage();
+        }
     }
 }

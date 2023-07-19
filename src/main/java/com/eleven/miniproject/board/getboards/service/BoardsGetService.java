@@ -38,7 +38,7 @@ public class BoardsGetService {
     }
     public BoardResponseDto getSelectedBoard(Long boarId, HttpServletRequest request) {
 
-        Board findBoard = boardRepository.findByIdAndUser(boarId)
+        Board findBoard = boardRepository.findById(boarId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글을 찾을 수 없습니다."));
 
         return new BoardResponseDto(findBoard);

@@ -34,6 +34,9 @@ public class S3Service {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
+    @Value("${cloud.aws.s3.bucket.folder}")
+    private String bucketFolder;
+
     @Value("${cloud.aws.region.static}")
     private String region;
 
@@ -48,19 +51,45 @@ public class S3Service {
     }
 
     public UploadImage upload(MultipartFile file) throws IOException {
-        if (file.isEmpty()) {
+        if (file == null) {
             return null;
         }
 
         String fileName = file.getOriginalFilename();
 
         String storeImageName = createStoreImageName(fileName);
+
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentType(file.getContentType());
+        objectMetadata.setContentDisposition("inline");
 
-        s3Client.putObject(new PutObjectRequest(bucket, storeImageName, file.getInputStream(), objectMetadata)
+
+        s3Client.putObject(new PutObjectRequest(bucket, getKeyFromImageName(storeImageName), file.getInputStream(), objectMetadata)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
-        return new UploadImage(fileName, s3Client.getUrl(bucket, storeImageName).toString());
+        return new UploadImage(fileName, s3Client.getUrl(bucket, getKeyFromImageName(storeImageName)).toString());
+    }
+
+    public void deleteImage(String currentStoredImageName) {
+        if (!s3Client.doesObjectExist(bucket, extractKeyFromFullPath(currentStoredImageName))) {
+            throw new IllegalArgumentException("변경할 이미지가 없습니다");
+        }
+        extractKeyFromFullPath(currentStoredImageName);
+        s3Client.deleteObject(bucket, extractKeyFromFullPath(currentStoredImageName));
+    }
+
+    public UploadImage updateImage(String currentStoredImageName, MultipartFile image) throws IOException {
+
+        deleteImage(currentStoredImageName);
+
+        return upload(image);
+    }
+
+
+    private String getKeyFromImageName(String storeImageName) {
+        return bucketFolder + "/" + storeImageName;
+    }
+    private String extractKeyFromFullPath(String currentStoredImageName) {
+        return currentStoredImageName.substring(currentStoredImageName.lastIndexOf("/") - 11);
     }
 
     private String createStoreImageName(String originalImageName) {
@@ -74,4 +103,5 @@ public class S3Service {
         String extName = originalImageName.substring(pos + 1);
         return extName;
     }
+
 }
