@@ -3,10 +3,12 @@ package com.eleven.miniproject.user.controller;
 import com.eleven.miniproject.user.dto.LoginRequestDto;
 import com.eleven.miniproject.user.dto.SignupRequestDto;
 import com.eleven.miniproject.user.dto.StatusCodeDto;
+import com.eleven.miniproject.user.entity.ValidationSequence;
 import com.eleven.miniproject.user.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping("/user/signup")
-    public StatusCodeDto signup(@RequestBody @Valid SignupRequestDto requestDto) {
+    public StatusCodeDto signup(@RequestBody @Validated(ValidationSequence.class) SignupRequestDto requestDto) {
         userService.signup(requestDto);
 
         return new StatusCodeDto(HttpStatus.OK.value(),"회원가입 성공");
