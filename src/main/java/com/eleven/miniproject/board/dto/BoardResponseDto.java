@@ -3,6 +3,7 @@ package com.eleven.miniproject.board.dto;
 
 import com.eleven.miniproject.board.entity.Board;
 import com.eleven.miniproject.board.entity.UploadImage;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
