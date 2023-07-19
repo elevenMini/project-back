@@ -3,6 +3,7 @@ package com.eleven.miniproject.board.dto;
 
 import com.eleven.miniproject.board.entity.Board;
 import com.eleven.miniproject.board.entity.UploadImage;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -13,7 +14,9 @@ public class BoardResponseDto {
     private String title;
     private String content;
     private String username;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime createdAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime modifiedAt;
     private UploadImage uploadImage;
 
