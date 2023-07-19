@@ -2,7 +2,6 @@ package com.eleven.miniproject.board.deleteBoard.service;
 
 
 import com.eleven.miniproject.board.createBoard.service.S3Service;
-import com.eleven.miniproject.board.dto.BoardResponseDto;
 import com.eleven.miniproject.board.entity.Board;
 import com.eleven.miniproject.board.entity.Image;
 import com.eleven.miniproject.board.repository.BoardRepository;
