@@ -20,4 +20,8 @@ public class Image {
     public Image(UploadImage uploadImage) {
         this.uploadImage = uploadImage;
     }
+
+    public void updateImage(UploadImage uploadImage) {
+        this.uploadImage = uploadImage;
+    }
 }

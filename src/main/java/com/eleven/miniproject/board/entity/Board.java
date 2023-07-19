@@ -33,6 +33,21 @@ public class Board extends Timestamped {
         this.title = title;
         this.content = content;
         this.user = findUser;
+        findUser.getBoards().add(this);
         this.image = image;
+    }
+
+    public void updateBoard(String title, String content, UploadImage uploadImage) {
+        this.title = title;
+        this.content = content;
+        this.image.updateImage(uploadImage);
+
+    }
+
+    // 이미지가 없던 게시판에 이미지를 추가하는 메서드(overloading)
+    public void updateBoard(String title, String content, Image newImage) {
+        this.title = title;
+        this.content = content;
+        this.image = newImage;
     }
 }
