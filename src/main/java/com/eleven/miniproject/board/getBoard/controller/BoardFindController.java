@@ -1,8 +1,8 @@
-package com.eleven.miniproject.board.getboards.controller;
+package com.eleven.miniproject.board.getBoard.controller;
 
 
 import com.eleven.miniproject.board.dto.BoardResponseDto;
-import com.eleven.miniproject.board.getboards.service.BoardsGetService;
+import com.eleven.miniproject.board.getBoard.service.BoardsGetService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,5 +32,16 @@ public class BoardFindController {
     @GetMapping("/boards/{boardId}")
     public BoardResponseDto getSelectedBoard(@PathVariable("boardId") Long boarId, HttpServletRequest request) {
         return boardsGetService.getSelectedBoard(boarId, request);
+    }
+
+    //1. 전체에서 탑 5
+    @GetMapping("/boards/top5")
+    public List<BoardResponseDto> getBoardsTop5Recently() {
+        return boardsGetService.getBoardsTop5Recently();
+    }
+
+    @GetMapping("/boards/user/top5")
+    public List<BoardResponseDto> getBoardsTop5InUserRecently(HttpServletRequest request) {
+        return boardsGetService.getBoardsTop5InUserRecently(request);
     }
 }

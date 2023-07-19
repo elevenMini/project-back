@@ -1,4 +1,4 @@
-package com.eleven.miniproject.board.getboards.service;
+package com.eleven.miniproject.board.getBoard.service;
 
 
 import com.eleven.miniproject.board.dto.BoardResponseDto;
@@ -31,11 +31,13 @@ public class BoardsGetService {
         List<Board> boardList = boardRepository.findByUser_Username(findUser.getUsername());
         return boardList.stream().map(BoardResponseDto::new).toList();
     }
+
     public List<BoardResponseDto> getBoards() {
 
-        List<Board> boardList = boardRepository.findAll();
+        List<Board> boardList = boardRepository.findAllByOrderByModifiedAtDesc();
         return boardList.stream().map(BoardResponseDto::new).toList();
     }
+
     public BoardResponseDto getSelectedBoard(Long boarId, HttpServletRequest request) {
 
         Board findBoard = boardRepository.findById(boarId)
@@ -45,6 +47,23 @@ public class BoardsGetService {
 
     }
 
+    public List<BoardResponseDto> getBoardsTop5Recently() {
+        List<Board> top5Boards = boardRepository.findTop5ByOrderByModifiedAtDesc();
+        return top5Boards.stream().map(BoardResponseDto::new).toList();
+    }
+
+    public List<BoardResponseDto> getBoardsTop5InUserRecently(HttpServletRequest request) {
+        String username = findUsernameInJwtToken(request);
+
+        User findUser = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다"));
+
+        List<Board> top5BoardsInUser = boardRepository.findTop5ByUser_UsernameOrderByModifiedAtDesc(findUser.getUsername());
+
+        return top5BoardsInUser.stream().map(BoardResponseDto::new).toList();
+    }
+
+
     private String findUsernameInJwtToken(HttpServletRequest request) {
         String tokenFromRequest = jwtUtil.getTokenFromRequest(request);
         String tokenValue = jwtUtil.substringToken(tokenFromRequest);
@@ -53,5 +72,4 @@ public class BoardsGetService {
         }
         return jwtUtil.getUserInfoFromToken(tokenValue).getSubject();
     }
-
 }

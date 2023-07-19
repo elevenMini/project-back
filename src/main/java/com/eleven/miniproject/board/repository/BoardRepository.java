@@ -2,7 +2,6 @@ package com.eleven.miniproject.board.repository;
 
 import com.eleven.miniproject.board.entity.Board;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -19,4 +18,11 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
             "left join fetch b.image i " +
             "where b.id = :boardId and u.username = :username")
     Optional<Board> findBoardAndImageByIdAndUsername(@Param("boardId") Long boardId, @Param("username") String username);
+
+
+    List<Board> findAllByOrderByModifiedAtDesc();
+
+    List<Board> findTop5ByOrderByModifiedAtDesc();
+
+    List<Board> findTop5ByUser_UsernameOrderByModifiedAtDesc(String username);
 }

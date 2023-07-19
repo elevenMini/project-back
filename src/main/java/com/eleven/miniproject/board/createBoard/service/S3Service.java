@@ -77,7 +77,7 @@ public class S3Service {
         s3Client.deleteObject(bucket, extractKeyFromFullPath(currentStoredImageName));
     }
 
-    public UploadImage updateImage(String currentStoredImageName, MultipartFile image) throws IOException {
+    public UploadImage updateImageFile(String currentStoredImageName, MultipartFile image) throws IOException {
 
         deleteImage(currentStoredImageName);
 

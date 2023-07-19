@@ -41,9 +41,9 @@ public class BoardCreateService {
         UploadImage uploadImage = s3Service.upload(requestDto.getImage());
 
         Image savedImage = null;
-        if (uploadImage != null) {
+//        if (uploadImage != null) {
             savedImage = imageRepository.save(new Image(uploadImage));
-        }
+//        }
 
         // 게시글 저장
         Board savedBoard = boardRepository.save(new Board(findUser, requestDto.getTitle(), requestDto.getContent(), savedImage));

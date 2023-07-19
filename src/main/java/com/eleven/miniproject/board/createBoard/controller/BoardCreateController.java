@@ -26,7 +26,7 @@ public class BoardCreateController {
     public BoardResponseDto createBoard(
             @RequestParam("title") String title,
             @RequestParam("content") String content,
-            @RequestParam(value = "image",required = false) MultipartFile image,
+            @RequestParam(value = "image") MultipartFile image,
             HttpServletRequest request
     ) throws IOException {
         BoardRequestDto requestDto = new BoardRequestDto(title, content, image);
