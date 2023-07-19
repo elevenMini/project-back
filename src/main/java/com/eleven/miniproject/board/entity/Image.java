@@ -21,7 +21,7 @@ public class Image {
         this.uploadImage = uploadImage;
     }
 
-    public void updateImage(UploadImage uploadImage) {
+    public void updateImageEntity(UploadImage uploadImage) {
         this.uploadImage = uploadImage;
     }
 }

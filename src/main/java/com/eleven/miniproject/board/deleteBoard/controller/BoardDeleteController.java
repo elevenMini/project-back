@@ -1,8 +1,6 @@
 package com.eleven.miniproject.board.deleteBoard.controller;
 
-import com.amazonaws.Response;
 import com.eleven.miniproject.board.deleteBoard.service.BoardDeleteService;
-import com.eleven.miniproject.board.dto.BoardResponseDto;
 import com.eleven.miniproject.user.dto.StatusCodeDto;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
