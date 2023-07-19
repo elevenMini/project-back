@@ -16,16 +16,16 @@ public class BoardResponseDto {
     private String content;
     private String username;
   
-    @JsonFormat(
-            shape = JsonFormat.Shape.STRING,
-            pattern = "yyyy-MM-dd HH:mm:ss",
-            timezone = "Asia/Seoul")
+//    @JsonFormat(
+//            shape = JsonFormat.Shape.STRING,
+//            pattern = "yyyy-MM-dd HH:mm:ss",
+//            timezone = "Asia/Seoul")
     private LocalDateTime createdAt;
   
-    @JsonFormat(
-            shape = JsonFormat.Shape.STRING,
-            pattern = "yyyy-MM-dd HH:mm:ss",
-            timezone = "Asia/Seoul")
+//    @JsonFormat(
+//            shape = JsonFormat.Shape.STRING,
+//            pattern = "yyyy-MM-dd HH:mm:ss",
+//            timezone = "Asia/Seoul")
     private LocalDateTime modifiedAt;
 
     private UploadImage uploadImage;
